@@ -22,7 +22,7 @@ const page = async ({ params }: RouteParams) => {
 
   })
 
-  // console.log(feedback);
+  console.log(feedback);
 
 
   return (
