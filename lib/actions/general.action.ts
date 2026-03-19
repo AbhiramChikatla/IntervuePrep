@@ -99,19 +99,39 @@ export async function createFeedback(params: CreateFeedbackParams) {
     }
 }
 
-export async function getFeedbackByInterviewId(params: GetFeedbackByInterviewIdParams): Promise<Feedback | null> {
 
-    const { interviewId, userId } = params;
 
-    const feedback = await db.collection('feedback').where('interviewId', '==', interviewId).where('userId', '==', userId).limit(1).get();
+export async function getFeedbackByInterviewId(
+  params: GetFeedbackByInterviewIdParams
+): Promise<Feedback | null> {
 
-    if(feedback.empty) return null;
+  const { interviewId, userId } = params;
 
-    const feedbackDoc = feedback.docs[0];
+  // 🚨 IMPORTANT: handle missing userId
+  console.log("In the getFeedbackByInterviewId function");
+  console.log("interviewId",interviewId,"userId",userId)
+  let query = db
+    .collection("feedback")
+    .where("interviewId", "==", interviewId);
 
-    return {
-        id: feedbackDoc.id,
-        ...feedbackDoc.data()
-    } as Feedback;
+    console.log("the query is ",query)
+  if (userId) {
+    query = query.where("userId", "==", userId);
+  }
+    console.log("the updated query is ",query)
+
+  const snapshot = await query.limit(1).get();
+
+    console.log("the snapshot is ",snapshot)
+
+  if (snapshot.empty) return null;
+
+  const doc = snapshot.docs[0];
+
+    console.log("the updated doc is ",doc)
+
+  return {
+    id: doc.id,
+    ...doc.data(),
+  } as Feedback;
 }
-

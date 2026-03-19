@@ -27,6 +27,10 @@ const page = async ({ params }: RouteParams) => {
   })
 
   console.log("the feedback is",feedback);
+  console.log("the user is",user,user.id);
+  console.log("the id is",id);
+  console.log("the interview is",interview);
+
 
 
   return (
