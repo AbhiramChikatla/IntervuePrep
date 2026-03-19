@@ -26,7 +26,7 @@ const page = async ({ params }: RouteParams) => {
 
   })
 
-  console.log(feedback);
+  console.log("the feedback is",feedback);
 
 
   return (
