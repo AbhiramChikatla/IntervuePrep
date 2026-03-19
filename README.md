@@ -18,12 +18,12 @@ IntervuePrep is an AI-powered mock interview platform built with Next.js App Rou
 - Validation and forms: Zod, React Hook Form
 - Authentication and database: Firebase Auth, Firestore, Firebase Admin SDK
 - AI services:
-	- Google Gemini via AI SDK for question and feedback generation
-	- Vapi for voice interview interactions
+    - Google Gemini via AI SDK for question and feedback generation
+    - Vapi for voice interview interactions
 
 ## Project Structure
 
-~~~text
+```text
 app/
 	(auth)/            # Sign-in and sign-up routes
 	(root)/            # Main authenticated app routes
@@ -33,7 +33,7 @@ constants/           # Interviewer config, mappings, schemas
 firebase/            # Firebase client and admin setup
 lib/actions/         # Server actions for auth and interview logic
 types/               # Shared TypeScript definitions
-~~~
+```
 
 ## Prerequisites
 
@@ -47,7 +47,7 @@ types/               # Shared TypeScript definitions
 
 Create a .env.local file in the project root and set the following:
 
-~~~env
+```env
 NEXT_PUBLIC_FIREBASE_API_KEY=
 FIREBASE_PROJECT_ID=
 FIREBASE_CLIENT_EMAIL=
@@ -57,7 +57,7 @@ NEXT_PUBLIC_VAPI_WEB_TOKEN=
 NEXT_PUBLIC_VAPI_WORKFLOW_ID=
 
 GOOGLE_GENERATIVE_AI_API_KEY=
-~~~
+```
 
 Notes:
 
@@ -68,21 +68,21 @@ Notes:
 
 1. Install dependencies
 
-~~~bash
+```bash
 npm install
-~~~
+```
 
 2. Start the development server
 
-~~~bash
+```bash
 npm run dev
-~~~
+```
 
 3. Open the app
 
-~~~text
+```text
 http://localhost:3000
-~~~
+```
 
 ## Available Scripts
 
@@ -94,18 +94,22 @@ http://localhost:3000
 ## Core Flows
 
 1. Authentication
+
 - Users sign up and sign in with Firebase Auth.
 - Session cookies are created server-side for authenticated access.
 
 2. Interview generation
+
 - Users provide role, level, stack, question type, and amount.
 - The server route generates questions with Gemini and stores interviews in Firestore.
 
 3. Live interview session
+
 - Vapi initiates a voice interview using assistant settings from the constants module.
 - Transcript messages are collected during the call.
 
 4. Feedback generation
+
 - Transcript data is evaluated by Gemini against a strict schema.
 - Structured scores, strengths, and improvement areas are stored in Firestore.
 
@@ -118,26 +122,26 @@ Basic production flow:
 1. Configure all environment variables in your deployment platform.
 2. Build the app:
 
-~~~bash
+```bash
 npm run build
-~~~
+```
 
 3. Start production server (if self-hosting):
 
-~~~bash
+```bash
 npm run start
-~~~
+```
 
 ## Troubleshooting
 
 - Firebase admin auth errors:
-	- Verify FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL, and FIREBASE_PRIVATE_KEY.
+    - Verify FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL, and FIREBASE_PRIVATE_KEY.
 - Gemini request failures:
-	- Confirm GOOGLE_GENERATIVE_AI_API_KEY is valid and has quota.
+    - Confirm GOOGLE_GENERATIVE_AI_API_KEY is valid and has quota.
 - Vapi call issues:
-	- Confirm NEXT_PUBLIC_VAPI_WEB_TOKEN and NEXT_PUBLIC_VAPI_WORKFLOW_ID are set and active.
+    - Confirm NEXT_PUBLIC_VAPI_WEB_TOKEN and NEXT_PUBLIC_VAPI_WORKFLOW_ID are set and active.
 - Empty interview lists:
-	- Check Firestore rules and ensure documents are written to users, interviews, and feedback collections.
+    - Check Firestore rules and ensure documents are written to users, interviews, and feedback collections.
 
 ## Roadmap Ideas
 

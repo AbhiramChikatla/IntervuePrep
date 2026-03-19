@@ -13,6 +13,10 @@ const page = async ({ params }: RouteParams) => {
   const user = await getCurrentUser();
 
   const interview = await getInterviewsById(id);
+  // change1:
+  if (!user) {
+  redirect("/"); // or login page
+}
 
   if(!interview) redirect("/");
 
