@@ -108,27 +108,21 @@ export async function getFeedbackByInterviewId(
   const { interviewId, userId } = params;
 
   // 🚨 IMPORTANT: handle missing userId
-  console.log("In the getFeedbackByInterviewId function");
-  console.log("interviewId",interviewId,"userId",userId)
   let query = db
     .collection("feedback")
     .where("interviewId", "==", interviewId);
 
-    console.log("the query is ",query)
   if (userId) {
     query = query.where("userId", "==", userId);
   }
-    console.log("the updated query is ",query)
 
   const snapshot = await query.limit(1).get();
 
-    console.log("the snapshot is ",snapshot)
 
   if (snapshot.empty) return null;
 
   const doc = snapshot.docs[0];
 
-    console.log("the updated doc is ",doc)
 
   return {
     id: doc.id,
